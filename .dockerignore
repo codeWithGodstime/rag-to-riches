@@ -1,0 +1,25 @@
+# Ignore the Python cache directories
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore virtual environment
+venv/
+env/
+
+# Ignore local environment variable files
+.env
+
+# Ignore log files
+*.log
+
+# Ignore version control directories
+.git/
+.svn/
+
+# Ignore build artifacts
+build/
+dist/
+*.egg-info/
+
+README.md
