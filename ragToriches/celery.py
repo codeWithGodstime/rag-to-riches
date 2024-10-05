@@ -4,9 +4,9 @@ import os
 
 from celery import Celery
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "dj_auth.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ragToriches.settings")
 
-app = Celery("dj_auth")
+app = Celery("ragToriches")
 
 app.config_from_object("django.conf:settings", namespace="CELERY")
 

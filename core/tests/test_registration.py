@@ -106,19 +106,6 @@ class TestUserRegistration:
         assert "errors" in response.data
         assert response.data['errors']['password'] == "Password must contain at least one special character."
 
-    def test_passing_extra_fields(self, client, user_data):
-        data={
-            "email": user_data["email"],
-            "password": user_data["password"],
-            "username": 'test_username'
-        }
-        url = reverse("users-list")
-        response = client.post(url, data, format="json")
-        assert response.status_code == 201
-        
-        user = User.objects.filter(email=user_data['email']).first()
-        assert user.username is None
-        assert user.email == user_data['email']
 
 
     

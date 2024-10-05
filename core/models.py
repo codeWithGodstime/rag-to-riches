@@ -6,13 +6,13 @@ from .manager import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(unique=True, blank=False, null=True, max_length=300)
+    
     email = models.EmailField(unique=True, db_index=True)
     first_name = models.CharField(max_length=300, blank=False, null=True)
     last_name = models.CharField(max_length=300, blank=False, null=True)
-    # role = None
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    income = models.DecimalField(max_digits=16, decimal_places=2, default=0.00)
 
     is_active = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
@@ -20,13 +20,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
 
     profile_picture = models.ImageField(blank=True, default="default.jpg")
-    bio = models.TextField(null=True, blank=True)
-    # country = models.CharField() # change to django_coutries
-    # state = models.CharField()
-    address = models.CharField(max_length=500, blank=True, null=True)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ["first_name", "last_name"]
 
     objects = UserManager()
 

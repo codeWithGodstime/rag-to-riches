@@ -3,8 +3,8 @@ version: "3"
 services:
   backend:
     build: .
-    image: dj-auth:latest
-    container_name: dj_auth-1
+    image: r_2_r:latest
+    container_name: ragToriches-1
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
@@ -17,7 +17,7 @@ services:
 
   database:
     image: postgres:alpine3.20
-    container_name: dj_auth_postgres
+    container_name: r_2_r_postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -47,9 +47,9 @@ services:
 
   celery:
     build: .
-    image: dj_auth_celery
-    container_name: dj_auth_celery
-    command: celery -A dj_auth worker --loglevel=info
+    image: ragToriches_celery
+    container_name: r_2_r_celery
+    command: celery -A ragToriches worker --loglevel=info
     volumes:
       - .:/app
     depends_on:

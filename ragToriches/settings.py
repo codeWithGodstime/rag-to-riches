@@ -20,7 +20,10 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
-    "core"
+    'drf_spectacular',
+    'django_filters',
+    "core",
+    "expense"
 ]
 
 MIDDLEWARE = [
@@ -33,7 +36,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'dj_auth.urls'
+ROOT_URLCONF = 'ragToriches.urls'
 
 TEMPLATES = [
     {
@@ -51,7 +54,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'dj_auth.wsgi.application'
+WSGI_APPLICATION = 'ragToriches.wsgi.application'
 
 DATABASES = {
     'default': {
@@ -90,12 +93,24 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    "DEFAULT_PAGINATION_CLASS": 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'PAGE_SIZE': 20
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=120),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=3),
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Rag to Riches',
+    'DESCRIPTION': 'acheive your goals',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
 }
 
 AUTH_USER_MODEL = "core.User"

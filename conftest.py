@@ -14,13 +14,7 @@ def client():
     client = APIClient()
     return client
 
-# @pytest.fixture(autouse=True)
-# def email_backend_override():
-#     settings.EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#     settings.EMAIL_HOST = "localhost"  # or '127.0.0.1'
-#     settings.EMAIL_PORT = 1025
-
-
+    
 @pytest.fixture
 def user_data():
     return {

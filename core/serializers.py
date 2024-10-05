@@ -62,8 +62,6 @@ class UserSerializer:
                 "first_name",
                 "last_name",
                 "profile_picture",
-                "bio",
-                "address",
                 "created_at",
                 "updated_at"
             )
