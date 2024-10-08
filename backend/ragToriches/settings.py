@@ -12,10 +12,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", 'django-insecure-o^qw&nt_00jgnd-k)q0rlyzo46
 DEBUG = bool(os.getenv("DEBUG")) == True
 print(DEBUG)
 
-if DEBUG:
-    ALLOWED_HOSTS = []
-else:
-    ALLOWED_HOSTS = ["rag-to-riches.onrender.com", ".onrender.com"]
+ALLOWED_HOSTS = ["rag-to-riches.onrender.com", ".onrender.com"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
