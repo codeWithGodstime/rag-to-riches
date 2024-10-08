@@ -14,7 +14,7 @@ DEBUG = os.getenv("DEBUG", False)
 if DEBUG:
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = [".vercel.app", "*"]
+    ALLOWED_HOSTS = ["rag-to-riches.onrender.com", ".onrender.com", "*"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
