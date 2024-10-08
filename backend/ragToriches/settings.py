@@ -1,14 +1,20 @@
 import os
 from pathlib import Path
 from datetime import timedelta
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-o^qw&nt_00jgnd-k)q0rlyzo46c+_8e14wg_^3o+0a#ehwnsfh'
+load_dotenv() #load the environment file
 
-DEBUG = True
+SECRET_KEY = os.getenv("SECRET_KEY", 'django-insecure-o^qw&nt_00jgnd-k)q0rlyzo46c+_8e14wg_^3o+0a#ehwnsfh')
 
-ALLOWED_HOSTS = []
+DEBUG = os.getenv("DEBUG", False)
+
+if DEBUG:
+    ALLOWED_HOSTS = []
+else:
+    ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -110,22 +116,26 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'acheive your goals',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
-    # OTHER SETTINGS
 }
 
 AUTH_USER_MODEL = "core.User"
 FRONTEND_DOMAIN="localhost:3000"
 PASSWORD_RESET_TIMEOUT = 60 * 60 # 1 hour
 
-# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-# EMAIL_HOST='mailhog'
-# EMAIL_PORT=1025
-# EMAIL_USE_TLS = False  # Mailhog doesn't use TLS
-# EMAIL_USE_SSL = False
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = "mailhog"  # or '127.0.0.1'
+    EMAIL_PORT = 1025
+else:  
+    EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
+    EMAIL_HOST=os.getenv("EMAIL_HOST")
+    EMAIL_PORT=os.getenv("EMAIL_PORT")
+    EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
+    EMAIL_USE_SSL = os.getenv("EMAIL_USE_SSL")
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "mailhog"  # or '127.0.0.1'
-EMAIL_PORT = 1025
 
 CELERY_BROKER_URL = os.getenv("CELERY_BROKER", "redis://redis:6379/0")
 CELERY_RESULT_BACKEND = os.getenv("CELERY_BACKEND", "redis://redis:6379/0")
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
