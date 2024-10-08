@@ -14,7 +14,7 @@ DEBUG = os.getenv("DEBUG", False)
 if DEBUG:
     ALLOWED_HOSTS = []
 else:
-    ALLOWED_HOSTS = ["*"]
+    ALLOWED_HOSTS = [".vercel.app", "*"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
